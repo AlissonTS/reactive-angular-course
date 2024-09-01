@@ -12,8 +12,6 @@ import { filter, tap } from "rxjs/operators";
 export class CoursesCardListComponent implements OnInit {
   @Input() courses: Course[] = [];
 
-  @Output() coursesChanged = new EventEmitter();
-
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -33,10 +31,7 @@ export class CoursesCardListComponent implements OnInit {
 
     dialogRef
       .afterClosed()
-      .pipe(
-        filter((value) => !!value),
-        tap(() => this.coursesChanged.emit())
-      )
+      .pipe(filter((value) => !!value))
       .subscribe();
   }
 }
